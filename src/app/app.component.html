@@ -1,14 +1,18 @@
-<mat-tab-group>
-  <mat-tab [label]="'Negative (' + negativeFeedbackList.length + ')'">
-    <ng-container *ngTemplateOutlet="reviewsListTmpl; context: {$implicit: negativeFeedbackList}"></ng-container>
-  </mat-tab>
-  <mat-tab [label]="'Positive(' + positiveFeedbackList.length + ')'">
-    <ng-container *ngTemplateOutlet="reviewsListTmpl; context: {$implicit: positiveFeedbackList}"></ng-container>
-  </mat-tab>
-  <mat-tab [label]="'Neutral(' + neutralFeedbackList.length + ')'">
-    <ng-container *ngTemplateOutlet="reviewsListTmpl; context: {$implicit: neutralFeedbackList}"></ng-container>
-  </mat-tab>
-</mat-tab-group>
+<div class="main">
+  <div class="wrapper">
+    <mat-tab-group>
+      <mat-tab [label]="'Negative (' + negativeFeedbackList.length + ')'">
+        <ng-container *ngTemplateOutlet="reviewsListTmpl; context: {$implicit: negativeFeedbackList}"></ng-container>
+      </mat-tab>
+      <mat-tab [label]="'Positive(' + positiveFeedbackList.length + ')'">
+        <ng-container *ngTemplateOutlet="reviewsListTmpl; context: {$implicit: positiveFeedbackList}"></ng-container>
+      </mat-tab>
+      <mat-tab [label]="'Neutral(' + neutralFeedbackList.length + ')'">
+        <ng-container *ngTemplateOutlet="reviewsListTmpl; context: {$implicit: neutralFeedbackList}"></ng-container>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>
 
 <ng-template #reviewsListTmpl let-_list>
   <div  *ngFor="let _listItem of _list">
@@ -20,13 +24,14 @@
 </ng-template>
 
 <ng-template #messageTmpl let-_listItem>
-  <mat-card class="feedback-card">
-    <mat-card-content>
+  <mat-card class="feedback-card" [ngClass]="{'text-muted': !_listItem.isNew}" [tabindex]="_listItem.isNew ? -1 : 0">
+    <mat-card-content class="mat-large">
       {{_listItem.message | json}}
     </mat-card-content>
-    <mat-card-actions class="d-flex">
+    <mat-card-actions class="d-flex mat-small text-muted">
       <span>{{_listItem.author}}</span>
       <span class="align-right">{{_listItem.timestamp | date}}</span>
     </mat-card-actions>
   </mat-card>
 </ng-template>
+

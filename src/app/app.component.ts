@@ -22,7 +22,6 @@ export class AppComponent implements OnInit {
     // Connection opened
     socket.addEventListener('open', (event) => {
       console.log('connection opened');
-      debugger
     });
     socket.addEventListener('error', (event) => {
       debugger
@@ -43,7 +42,6 @@ export class AppComponent implements OnInit {
         return item.intention === 'NEUTRAL';
       }).map((item) => this.deserialize(item));
     }, (err) => {
-      debugger
     });
   }
   fetchFeed() {
@@ -54,12 +52,18 @@ export class AppComponent implements OnInit {
       intention: data.intention,
       author: data.user_name,
       timestamp: data.id,
-      message: data.post
+      message: data.post,
+      isNew: false
     };
   }
   handleNewMessage(event) {
-    const newMessage = JSON.parse(event.data);
-    this[`${newMessage.intention.toLowerCase()}FeedbackList`].splice(0, 0, JSON.parse(event.data));
+    const newMessage = {...JSON.parse(event.data), ...{isNew: true}};
+    const list = this[`${newMessage.intention.toLowerCase()}FeedbackList`];
+
+    list.forEach((item) => {
+      item.isNew = false;
+    });
+    list.splice(0, 0, newMessage);
     debugger
   }
 }
