@@ -33,7 +33,6 @@
     class="feedback-card"
     [ngClass]="{'text-muted': !_listItem.isNew}"
     [tabindex]="_listItem.isNew ? -1 : 0"
-    (click)="showOverlay(_listItem)"
   >
     <mat-card-actions>
         <div class="d-flex mat-small text-muted">
@@ -43,6 +42,7 @@
     </mat-card-actions>
     <mat-card-content class="mat-large">
         {{_listItem.message | json}}
+        <button mat-button color="primary" (click)="showOverlay(_listItem)">Articles</button>
     </mat-card-content>
     <facebook-widget [postInfo]="_listItem"></facebook-widget>
   </mat-card>

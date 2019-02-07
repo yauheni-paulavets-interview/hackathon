@@ -2,4 +2,8 @@
   background-color: white;
   width: 520px;
   height: 100vh;
+  overflow: auto;
+}
+mat-expansion-panel {
+    box-shadow: none !important;
 }

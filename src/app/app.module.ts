@@ -8,6 +8,7 @@ import { RelativePostsComponent } from './relative-posts/relative-posts.componen
 import { FacebookWidgetComponent } from './facebook-widget';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { Store } from './store';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
         MatExpansionModule,
         MatToolbarModule
     ],
-    providers: [],
+    providers: [Store],
     bootstrap: [AppComponent],
     schemas: [NO_ERRORS_SCHEMA]
 })

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { RelativePostsComponent } from './relative-posts/relative-posts.component';
+import { Store } from './store';
 
 @Component({
   selector: 'app-root',
@@ -15,12 +16,16 @@ export class AppComponent implements OnInit {
   negativeFeedbackList = [];
   positiveFeedbackList = [];
   neutralFeedbackList = [];
-  constructor(private http: HttpClient, private overlay: Overlay) {
+  constructor(private http: HttpClient, private overlay: Overlay, private store: Store) {
 
   }
 
   ngOnInit(): void {
     const socket = new WebSocket('wss://irq38ulvlb.execute-api.us-east-2.amazonaws.com/beta_0');
+    window.onbeforeunload = function() {
+        socket.onclose = function () {}; // disable onclose handler first
+        socket.close();
+    };
 
     // Connection opened
     socket.addEventListener('open', (event) => {
@@ -70,6 +75,7 @@ export class AppComponent implements OnInit {
     list.splice(0, 0, newMessage);
   }
   showOverlay(card) {
+      this.store.setSelectedMessage(card);
     const config = new OverlayConfig();
 
     config.positionStrategy = this.overlay.position()
