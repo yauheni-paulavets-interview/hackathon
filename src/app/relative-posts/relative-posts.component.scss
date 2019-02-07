@@ -1,9 +1,18 @@
 .relative-posts-wrapper {
   background-color: white;
-  width: 520px;
   height: 100vh;
   overflow: auto;
 }
 mat-expansion-panel {
     box-shadow: none !important;
+}
+
+:host {
+    background: white;
+    width: 600px;
+}
+
+mat-form-field {
+    display: block;
+    margin-bottom: 15px;
 }

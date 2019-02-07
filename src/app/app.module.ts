@@ -9,6 +9,8 @@ import { FacebookWidgetComponent } from './facebook-widget';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Store } from './store';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material';
 
 @NgModule({
     declarations: [
@@ -25,7 +27,9 @@ import { Store } from './store';
         BrowserAnimationsModule,
         MaterialModule,
         MatExpansionModule,
-        MatToolbarModule
+        MatToolbarModule,
+        MatFormFieldModule,
+        MatInputModule
     ],
     providers: [Store],
     bootstrap: [AppComponent],
