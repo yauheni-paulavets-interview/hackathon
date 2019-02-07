@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { RelativePostsComponent } from './relative-posts/relative-posts.component';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +15,7 @@ export class AppComponent implements OnInit {
   negativeFeedbackList = [];
   positiveFeedbackList = [];
   neutralFeedbackList = [];
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private overlay: Overlay) {
 
   }
 
@@ -64,6 +67,24 @@ export class AppComponent implements OnInit {
       item.isNew = false;
     });
     list.splice(0, 0, newMessage);
-    debugger
+  }
+
+  showOverlay(card) {
+    const config = new OverlayConfig();
+
+    config.positionStrategy = this.overlay.position()
+      .global();
+
+    config.hasBackdrop = true;
+
+    const overlayRef = this.overlay.create(config);
+
+    overlayRef.backdropClick().subscribe(() => {
+      overlayRef.dispose();
+    });
+
+    const userProfilePortal = new ComponentPortal(RelativePostsComponent);
+
+    overlayRef.attach(userProfilePortal);
   }
 }

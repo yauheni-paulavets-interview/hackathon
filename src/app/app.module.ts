@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from '../angular-material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { RelativePostsComponent } from './relative-posts/relative-posts.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    RelativePostsComponent
   ],
   imports: [
     BrowserModule,
@@ -18,6 +20,9 @@ import { HttpClientModule } from '@angular/common/http';
     MaterialModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    RelativePostsComponent
+  ]
 })
 export class AppModule { }

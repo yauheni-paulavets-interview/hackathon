@@ -1,4 +1,4 @@
-<div class="main">
+<div class="main" cdk-portal>
   <div class="wrapper">
     <mat-tab-group>
       <mat-tab [label]="'Negative (' + negativeFeedbackList.length + ')'">
@@ -24,7 +24,12 @@
 </ng-template>
 
 <ng-template #messageTmpl let-_listItem>
-  <mat-card class="feedback-card" [ngClass]="{'text-muted': !_listItem.isNew}" [tabindex]="_listItem.isNew ? -1 : 0">
+  <mat-card
+    class="feedback-card"
+    [ngClass]="{'text-muted': !_listItem.isNew}"
+    [tabindex]="_listItem.isNew ? -1 : 0"
+    (click)="showOverlay(_listItem)"
+  >
     <mat-card-content class="mat-large">
       {{_listItem.message | json}}
     </mat-card-content>
