@@ -1,5 +1,5 @@
+
 .feedback-card {
-  max-width: 500px;
   margin: 4px
 }
 .d-flex {
@@ -15,9 +15,12 @@
   opacity: 0.8;
 }
 .wrapper {
-  width: 530px;
+  width: 700px;
+  padding: 15px;
   margin: 0 auto;
 }
-.main {
-  background-color: #eee;
+
+.not-found {
+    padding: 10px;
+    text-align: center;
 }

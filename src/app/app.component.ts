@@ -56,6 +56,7 @@ export class AppComponent implements OnInit {
       author: data.user_name,
       timestamp: data.id,
       message: data.post,
+      post_id: data.post_id,
       isNew: false
     };
   }
@@ -68,7 +69,6 @@ export class AppComponent implements OnInit {
     });
     list.splice(0, 0, newMessage);
   }
-
   showOverlay(card) {
     const config = new OverlayConfig();
 

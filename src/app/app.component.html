@@ -1,4 +1,9 @@
 <div class="main" cdk-portal>
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+            <span>Hackathon Demo</span>
+        </mat-toolbar-row>
+    </mat-toolbar>
   <div class="wrapper">
     <mat-tab-group>
       <mat-tab [label]="'Negative (' + negativeFeedbackList.length + ')'">
@@ -18,7 +23,7 @@
   <div  *ngFor="let _listItem of _list">
     <ng-container *ngTemplateOutlet="messageTmpl; context: {$implicit: _listItem}"></ng-container>
   </div>
-  <div *ngIf="!_list.length">
+  <div *ngIf="!_list.length" class="not-found">
     No items found
   </div>
 </ng-template>
@@ -30,13 +35,16 @@
     [tabindex]="_listItem.isNew ? -1 : 0"
     (click)="showOverlay(_listItem)"
   >
-    <mat-card-content class="mat-large">
-      {{_listItem.message | json}}
-    </mat-card-content>
-    <mat-card-actions class="d-flex mat-small text-muted">
-      <span>{{_listItem.author}}</span>
-      <span class="align-right">{{_listItem.timestamp | date}}</span>
+    <mat-card-actions>
+        <div class="d-flex mat-small text-muted">
+            <span>{{_listItem.author}}</span>
+            <span class="align-right">{{_listItem.timestamp | date}}</span>
+        </div>
     </mat-card-actions>
+    <mat-card-content class="mat-large">
+        {{_listItem.message | json}}
+    </mat-card-content>
+    <facebook-widget [postInfo]="_listItem"></facebook-widget>
   </mat-card>
 </ng-template>
 
